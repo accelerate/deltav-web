@@ -83,11 +83,17 @@ gulp.task('templates-dist', function () {
  * Vendors
  */
 gulp.task('vendors', function () {
-  var bowerStream = g.bowerFiles();
-  return es.merge(
-    bowerStream.pipe(g.filter('**/*.css')).pipe(dist('css', 'vendors')),
-    bowerStream.pipe(g.filter('**/*.js')).pipe(dist('js', 'vendors'))
-  );
+    var bowerStream = g.bowerFiles();
+    return es.merge(
+        bowerStream.pipe(g.filter('**/*.css')).pipe(dist('css', 'css/vendors')),
+        bowerStream.pipe(g.filter('**/*.js')).pipe(dist('js', 'vendors'))
+    );
+});
+
+gulp.task('bootstrap-icons', function () {
+  gulp.src('./bower_components/**/fonts/*')
+    .pipe(g.rename({ dirname: '.' }))
+    .pipe(gulp.dest('./dist/fonts/'));
 });
 
 /**
@@ -116,11 +122,21 @@ gulp.task('assets', function () {
 });
 
 /**
+ * Dist Clean
+ */
+gulp.task('dist-clean', function() {
+  return gulp.src('dist', {read: false})
+    .pipe(g.clean());
+
+});
+
+/**
  * Dist
  */
-gulp.task('dist', ['vendors', 'assets', 'styles-dist', 'scripts-dist'], function () {
+gulp.task('dist', ['vendors', 'bootstrap-icons', 'assets', 'styles-dist', 'scripts-dist'], function () {
   return gulp.src('./src/app/index.html')
-    .pipe(g.inject(gulp.src('./dist/vendors.min.{js,css}'), {ignorePath: 'dist', starttag: '<!-- inject:vendor:{{ext}} -->'}))
+    .pipe(g.inject(gulp.src('./dist/vendors.min.js'), {ignorePath: 'dist', starttag: '<!-- inject:vendor:{{ext}} -->'}))
+    .pipe(g.inject(gulp.src('./dist/css/vendors.min.css'), {ignorePath: 'dist', starttag: '<!-- inject:vendor:{{ext}} -->'}))
     .pipe(g.inject(gulp.src('./dist/' + bower.name + '.min.{js,css}'), {ignorePath: 'dist'}))
     .pipe(g.htmlmin(htmlminOpts))
     .pipe(gulp.dest('./dist/'));
