@@ -1,0 +1,28 @@
+{
+  "name": "deltav-web",
+  "main": [
+    "/dist/deltav-web.min.js",
+    "/dist/deltav-web.min.css"
+  ],
+  "version": "0.1.0",
+  "description": "TODO",
+  "authors": [
+    "TODO"
+  ],
+  "ignore": [
+    "**/.*",
+    "package.json",
+    "klei.json",
+    "gulpfile.js",
+    "node_modules",
+    "bower_components",
+    "src"
+  ],
+  "dependencies": {
+    "angular": "^1.2.16",
+    "angular-ui-router": "^0.2.10"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.2.16"
+  }
+}
