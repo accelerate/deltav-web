@@ -1,5 +1,5 @@
 
-angular.module('deltavWeb', [
-  'ngRoute',
-  'deltav-web-templates'
+angular.module('deltav', [
+  'ui.router',
+  'deltav-templates'
 ]);

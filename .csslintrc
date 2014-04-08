@@ -5,5 +5,14 @@
   "compatible-vendor-prefixes": false,
   "gradients": false,
   "adjoining-classes": false,
-  "outline-none" : false
+  "outline-none" : false,
+  "important": false,
+  "unqualified-attributes": false,
+  "unique-headings": false,
+  "universal-selector": false,
+  "regex-selectors": false,
+  "zero-units": false,
+  "qualified-headings": false,
+  "shorthand": false,
+  "font-sizes": false
 }
